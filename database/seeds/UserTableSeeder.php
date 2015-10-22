@@ -1,20 +1,19 @@
 <?php
 
-use Faker\Factory as Faker;
 use Faker\Generator;
+use Faker\Factory as Faker;
 use Wactas\Entities\User;
 
 class UserTableSeeder extends BaseSeeder
 {
-    
-    public function getDummyData(Generator $faker, array $customValues = array()) 
+    public function getDummyData(Generator $faker, array $customValues = array())
     {
         return [
             'name' => $faker->name,
             'email' => $faker->email,
             'password' => bcrypt('secret'),
             'avatar' => $faker->imageUrl(64, 64),
-            'status' => $faker->randomElement([false, false, true])
+            'status' => $faker->randomElement([false, false, true]),
         ];
     }
 
@@ -26,19 +25,20 @@ class UserTableSeeder extends BaseSeeder
     public function run()
     {
         $this->createAdmin();
-        $this->createMultiple(50);
+        $this->createMultiple(49);
     }
-    
-    private function createAdmin()
+
+    public function createAdmin()
     {
         $faker = Faker::create();
-        
+
         $this->create([
             'name' => 'Sudo',
             'email' => 'joseluis@watson.pe',
             'password' => bcrypt('ABcd1234'),
             'avatar' => $faker->imageUrl(64, 64),
-            'status' => true
+            'status' => true,
+            'role_id' => 1,
         ]);
     }
 }

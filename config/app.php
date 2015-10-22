@@ -144,6 +144,7 @@ return [
 		'Wactas\Providers\ConfigServiceProvider',
 		'Wactas\Providers\EventServiceProvider',
 		'Wactas\Providers\RouteServiceProvider',
+                'Wactas\Providers\HtmlServiceProvider',
 
 	],
 
@@ -192,6 +193,12 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+            
+                /**
+                 * Vendor alias
+                 */
+                'Form' => 'Collective\Html\FormFacade',
+                'Html' => 'Collective\Html\HtmlFacade',
 
 	],
 

@@ -1,11 +1,12 @@
-<?php namespace Wactas\Http\Controllers;
+<?php
+
+namespace Wactas\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 
-abstract class Controller extends BaseController {
-
-	use DispatchesCommands, ValidatesRequests;
-
+abstract class Controller extends BaseController
+{
+    use DispatchesCommands, ValidatesRequests;
 }

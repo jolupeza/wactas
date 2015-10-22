@@ -1,7 +1,8 @@
-<?php namespace Wactas\Commands;
+<?php
 
-abstract class Command {
+namespace Wactas\Commands;
 
-	//
-
+abstract class Command
+{
+    //
 }

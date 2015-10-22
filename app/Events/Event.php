@@ -1,7 +1,8 @@
-<?php namespace Wactas\Events;
+<?php
 
-abstract class Event {
+namespace Wactas\Events;
 
-	//
-
+abstract class Event
+{
+    //
 }

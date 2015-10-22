@@ -6,7 +6,8 @@
 	"type": "project",
 	"require": {
 		"laravel/framework": "5.0.*",
-		"fzaninotto/faker": "^1.5"
+		"fzaninotto/faker": "^1.5",
+		"laravelcollective/html": "~5.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
@@ -18,7 +19,8 @@
 		],
 		"psr-4": {
 			"Wactas\\": "app/"
-		}
+		},
+                "files": ["app/helpers.php"]
 	},
 	"autoload-dev": {
 		"classmap": [

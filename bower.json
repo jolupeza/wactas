@@ -1,0 +1,23 @@
+{
+  "name": "watson-actas",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jolupeza/wactas",
+  "authors": [
+    "Jose Perez <joseluis@watson.pe>"
+  ],
+  "description": "Sistema de registro de actas",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libraries",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

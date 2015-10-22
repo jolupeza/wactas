@@ -17,7 +17,7 @@ abstract class BaseSeeder extends Seeder
 
     protected function createMultiple($total, array $customValues = array())
     {
-        for ($i = 1; $i <= $total; $i++) {
+        for ($i = 1; $i <= $total; ++$i) {
             $this->create($customValues);
         }
     }
@@ -42,7 +42,7 @@ abstract class BaseSeeder extends Seeder
 
     protected function getRandom($model)
     {
-        if (! $this->collectionExist($model)) {
+        if (!$this->collectionExist($model)) {
             throw new Exception("The $model collection does not exist");
         }
 
@@ -54,7 +54,7 @@ abstract class BaseSeeder extends Seeder
         $reflection = new ReflectionClass($entity);
         $class = $reflection->getShortName();
 
-        if (! $this->collectionExist($class)) {
+        if (!$this->collectionExist($class)) {
             static::$pool[$class] = new Collection();
         }
 
