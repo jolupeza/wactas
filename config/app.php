@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale' => 'en',
+	'locale' => 'es',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,7 +78,7 @@ return [
 	|
 	*/
 
-	'key' => env('APP_KEY', 'SomeRandomString'),
+	'key' => env('APP_KEY', 'DxrkpmPy0Jy0CJfST0c6eOyp8kudd1XL'),
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
@@ -145,7 +145,7 @@ return [
 		'Wactas\Providers\EventServiceProvider',
 		'Wactas\Providers\RouteServiceProvider',
                 'Wactas\Providers\HtmlServiceProvider',
-
+                'Barryvdh\Debugbar\ServiceProvider',
 	],
 
 	/*
@@ -199,6 +199,7 @@ return [
                  */
                 'Form' => 'Collective\Html\FormFacade',
                 'Html' => 'Collective\Html\HtmlFacade',
+                'Debugbar' => 'Barryvdh\Debugbar\Facade',
 
 	],
 

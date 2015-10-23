@@ -9,19 +9,6 @@
             'admin.customers.index' => array(
                 'title' => 'Gestión de Clientes',
                 'icon'  => 'fa-university',
-//                'submenu_id' => 'sm-users',
-//                'submenu' => array(
-//                    array(
-//                        'title' => 'Usuarios',
-//                        'icon'  => 'fa-user',
-//                        'url'   => 'admin.users.index'
-//                    ),
-//                    array(
-//                        'title' => 'Perfiles',
-//                        'icon'  => 'fa-users',
-//                        'url'   => 'admin.roles.index'
-//                    )
-//                )
             ),
             'admin.users.index' => array(
                 'title' => 'Gestión de Usuarios',

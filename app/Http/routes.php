@@ -14,20 +14,22 @@
 Route::get('/', 'WelcomeController@index');
 
 Route::get('/admin', [
-    'as' => 'admin',
+    'as'         => 'admin',
     'middleware' => 'auth',
-    'uses' => 'Admin\DashboardController@index',
+    'uses'       => 'Admin\DashboardController@index',
 ]);
 
 Route::controllers([
-    'auth' => 'Auth\AuthController',
+    'auth'     => 'Auth\AuthController',
     'password' => 'Auth\PasswordController',
 ]);
 
 Route::group([
     'middleware' => 'auth',
-    'prefix' => 'auth',
-    'namespace' => 'Admin',
-], function () {
-
+    'prefix'     => 'admin',
+    'namespace'  => 'Admin'
+], function(){
+    Route::resource('users', 'UsersController'); 
+    Route::resource('roles', 'RolesController');
+    Route::resource('customers', 'CustomersController');
 });
