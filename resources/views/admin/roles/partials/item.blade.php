@@ -7,6 +7,6 @@
    	</td>
     <td align="center">
     	<a href="{{ route('admin.roles.edit', $role) }}" class="btn btn-success">Editar</a>
-        <a href="#" class="btn btn-danger js-delete" data-titles="{{ json_encode(['Perfil', 'Perfiles']) }}">Eliminar</a>
+        <a href="#" class="btn btn-danger js-delete" data-titles="{{ json_encode(['Perfil', 'Perfiles']) }}" data-total="true">Eliminar</a>
     </td>
 </tr>

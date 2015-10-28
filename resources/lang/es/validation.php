@@ -104,5 +104,7 @@ return [
         're-password' => 'Repetir contraseña',
         'role_id'     => 'Perfil',
         'role'        => 'Perfil',
+        'job'         => 'Cargo',
+        'customer_id' => 'Cliente'
     ],
 ];

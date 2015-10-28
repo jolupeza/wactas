@@ -4,6 +4,11 @@ class Customer extends Entity
 {
     protected $fillable = ['name', 'code', 'address', 'status'];
     
+    public function employees()
+    {
+        return $this->hasMany(Employee::getClass());
+    }
+    
     public function setCodeAttribute($value)
     {
         $characters = strtoupper($value);

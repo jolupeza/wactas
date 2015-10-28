@@ -20,6 +20,7 @@ class CreateCustomersTable extends Migration {
                         $table->string('address');
                         $table->string('logo');
                         $table->boolean('status')->default(false);
+                        $table->boolean('master')->default(false);
 			$table->timestamps();
 		});
 	}

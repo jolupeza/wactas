@@ -1,6 +1,7 @@
 <?php
 
 use Wactas\Entities\Customer;
+use Faker\Factory as Faker;
 use Faker\Generator;
 
 class CustomerTableSeeder extends BaseSeeder
@@ -22,4 +23,24 @@ class CustomerTableSeeder extends BaseSeeder
             'status' => $faker->randomElement([false, false, true])
         ];
     }
+    
+    public function run() 
+    {
+        $this->createMaster();
+        $this->createMultiple(49);
+    }
+
+    private function createMaster() 
+    {
+        $faker = Faker::create();
+        $this->create([
+            'name' => 'Agencia Watson',
+            'code' => 'AWT',
+            'address' => 'Calle Pacarmarca',
+            'logo' => $faker->imageUrl(64, 64),
+            'status' => true,
+            'master' => true
+        ]);
+    }
+
 }

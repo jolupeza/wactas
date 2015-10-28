@@ -15,17 +15,22 @@ var j = jQuery.noConflict();
             offText    : '<i class="glyphicon glyphicon-remove"></i>',
 		});
 
-	j('.js-delete').on('click', function(e){
+		body.on('click', '.js-delete', function(e){
 			e.preventDefault();
 
-			var titles = j(this).data('titles');
+			var $this = j(this);
+			var titles = $this.data('titles');
+			var displayTotal  = (typeof $this.data('total') !== 'undefined') ? $this.data('total') : false ;
 
 			var delForm = new DeleteForm(j('#form-delete'), j(this), titles);
 
 			delForm.submit(function(response) {
 				if (response.success) {
-					delForm.updateTotal(delForm.getTotal() - 1);
+					if (displayTotal) {
+						delForm.updateTotal(delForm.getTotal() - 1);
+					}
 
+					titles = titles.split(',');
 					msg_success.text('Se eliminó el ' + titles[0] + '.');
 					msg_success.fadeIn('slow');
 
@@ -37,6 +42,123 @@ var j = jQuery.noConflict();
 				}
 			});
 		});
+
+		// Display form by add email or phone
+		j('.js-display-form').on('click', function(ev){
+			ev.preventDefault();
+
+			var $this = j(this);
+			var type = $this.data('type');
+			var icon = $this.data('icon');
+			var form = j('#js-form-add-' + type);
+
+			var title = (type === 'email') ? 'Email' : 'Teléfono';
+
+			if ($this.hasClass('active')) {
+				form.fadeOut('slow', function() {
+					$this.html('Agregar ' + title + ' <i class="fa ' + icon + '"></i>').removeClass('btn-danger active').addClass('btn-success');
+				});
+				form.find('input[name="' + type + '"]').val('');
+				form.data('formValidation').resetForm();
+			} else {
+				form.fadeIn('slow', function() {
+					$this.html('Cancelar <i class="fa ' + icon + '">').removeClass('btn-success').addClass('btn-danger active');
+					form.find('input[name="' + type + '"]').focus();
+				});
+			}
+		});
+
+		j('#js-form-add-email').formValidation({
+            locale: 'es_ES',
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+		}).on('err.field.fv', function(e, data) {
+			var field = e.target;
+			j('small.help-block[data-bv-result="INVALID"]').addClass('hide');
+	    }).on('success.form.fv', function(e){
+			e.preventDefault();
+
+			var form = j(this);
+			var type = 'email';
+
+			var addForm = new AddForm(form, j('#js-add-' + type));
+
+			addForm.submit(function(response) {
+				if (response.success) {
+					var table = j('#js-table-' + type);
+					var content = '<tr data-id="' + response.employeeEmail.id + '" class="item">'
+        		    				+ '<td>' + response.employeeEmail.id + '</td>'
+				        		    + '<td>' + response.employeeEmail.email + '</td>'
+				        		    + '<td align="center">'
+				        		        + '<a href="#" class="btn btn-danger js-delete" data-titles="Email,Emails" data-total="false">x</a>'
+				        		    + '</td>'
+				        			+ '</tr>';
+
+				    if (table.find('tr').first().hasClass('js-no-' + type))
+				    {
+				    	table.find('tr').first().remove();
+				    }
+					table.append(content);
+
+					form.data('formValidation').resetForm();
+
+					form.fadeOut('slow', function() {
+						form.find('input[name="' + type + '"]').val('');
+						j('#js-add' + type).html('Agregar Email <i class="fa fa-envelope-o"></i>').removeClass('active btn-danger').addClass('btn-success');
+					});
+				}
+			});
+	    });
+
+		j('#js-form-add-phone').formValidation({
+            locale: 'es_ES',
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+		}).on('err.field.fv', function(e, data) {
+			var field = e.target;
+			j('small.help-block[data-bv-result="INVALID"]').addClass('hide');
+	    }).on('success.form.fv', function(e){
+			e.preventDefault();
+
+			var form = j(this);
+			var type = 'phone';
+
+			var addForm = new AddForm(form, j('#js-add-' + type));
+
+			addForm.submit(function(response) {
+				if (response.success) {
+					var table = j('#js-table-' + type);
+					var content = '<tr data-id="' + response.employeePhone.id + '" class="item">'
+        		    				+ '<td>' + response.employeePhone.id + '</td>'
+				        		    + '<td>' + response.employeePhone.phone + '</td>'
+				        		    + '<td align="center">'
+				        		        + '<a href="#" class="btn btn-danger js-delete" data-titles="Teléfono,Teléfonos" data-total="false">x</a>'
+				        		    + '</td>'
+				        			+ '</tr>';
+
+				    if (table.find('tr').first().hasClass('js-no-' + type))
+				    {
+				    	table.find('tr').first().remove();
+				    }
+					table.append(content);
+
+					form.data('formValidation').resetForm();
+
+					form.fadeOut('slow', function() {
+						j(this).find('input[name="' + type + '"]').val('');
+						j('#js-add' + type).html('Agregar Teléfono <i class="fa fa-phone"></i>').removeClass('active btn-danger').addClass('btn-success');
+					});
+				}
+			});
+	    });
 	});
 
 	function DeleteForm(form, button, titles) {
@@ -44,6 +166,8 @@ var j = jQuery.noConflict();
 		var id = item.data('id');
 		var action = form.attr('action').replace(':id', id);
 		var total = j('#js-total');
+
+		titles = titles.split(',');
 
 		this.getTotal = function() {
 			return parseInt(total.text().split(' ')[1]);
@@ -75,6 +199,26 @@ var j = jQuery.noConflict();
 					});
 				}, 3000);
 			});
+		}
+	}
+
+	function AddForm(form, button)
+	{
+		var action = form.attr('action');
+
+		this.submit = function(success) {
+			j.post(action, form.serialize(), function(response) {
+				success(response);
+			}).fail(function(){
+				msg_danger.text('No se pudo agregar. Por favor vuelve a intentarlo.');
+				msg_danger.fadeIn('slow');
+
+				setTimeout(function(){
+					msg_danger.fadeOut('slow', function(){
+						j(this).text('');
+					});
+				}, 3000);
+			}, 'json');
 		}
 	}
 })(jQuery);

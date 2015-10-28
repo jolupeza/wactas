@@ -32,4 +32,21 @@ Route::group([
     Route::resource('users', 'UsersController'); 
     Route::resource('roles', 'RolesController');
     Route::resource('customers', 'CustomersController');
+    Route::resource('employees', 'EmployeesController');
+    Route::delete('/employees/deleteEmail/{id}', [
+        'as'   => 'admin.employee.delete_email',
+        'uses' => 'EmployeesController@deleteEmail'
+    ]);
+    Route::post('/employees/addEmail', [
+        'as'   => 'admin.employee.add_email',
+        'uses' => 'EmployeesController@addEmail'
+    ]);
+    Route::delete('/employees/deletePhone/{id}', [
+        'as'   => 'admin.employee.delete_phone',
+        'uses' => 'EmployeesController@deletePhone'
+    ]);
+    Route::post('/employees/addPhone', [
+        'as'   => 'admin.employee.add_phone',
+        'uses' => 'EmployeesController@addPhone'
+    ]);
 });

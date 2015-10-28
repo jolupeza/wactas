@@ -8,6 +8,6 @@
    	</td>
     <td align="center">
     	<a href="{{ route('admin.customers.edit', $customer) }}" class="btn btn-success">Editar</a>
-        <a href="#" class="btn btn-danger js-delete" data-titles="{{ json_encode(['Cliente', 'Clientes']) }}">Eliminar</a>
+        <a href="#" class="btn btn-danger js-delete" data-titles="{{ json_encode(['Cliente', 'Clientes']) }}" data-total="true">Eliminar</a>
     </td>
 </tr>
