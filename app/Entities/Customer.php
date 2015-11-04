@@ -9,6 +9,11 @@ class Customer extends Entity
         return $this->hasMany(Employee::getClass());
     }
     
+    public function projects()
+    {
+        return $this->hasMany(Project::getClass());
+    }
+    
     public function setCodeAttribute($value)
     {
         $characters = strtoupper($value);

@@ -31,10 +31,13 @@ class EmployeesController extends Controller
 	 */
 	public function index(Request $request)
 	{            
-	    $employees = Employee::name($request->get('name'))->customerId($request->get('customer_id'))->with('customer')->paginate(15);
-            $customers = Customer::get();
+            $name = $request->get('name');
+            $customer_id = $request->get('customer_id');
+            
+	    $employees = $this->employeeRepository->filterPaginate($name, $customer_id);
+            $customers = Customer::get();            
 
-            return view('admin.employees.list', compact('employees', 'customers'));
+            return view('admin.employees.list', compact('employees', 'customers', 'name', 'customer_id'));
 	}
 
 	/**
@@ -59,6 +62,27 @@ class EmployeesController extends Controller
             $employee->save();
             Session::flash('success', 'Se agregó correctamente');
             return redirect()->route('admin.employees.edit', $employee->id);
+	}
+        
+        /**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+	public function add(EmployeeRequest $request)
+	{
+	    $employee = new Employee($request->all());  
+            $employee->status = TRUE;
+            $employee->save();
+            
+            $email = $request->get('email');
+            $success = $this->employeeRepository->addEmail($employee, $email);
+            
+            if ($request->ajax()) {
+                return response()->json(compact('success', 'employee'));
+            }
+            
+            exit;
 	}
 
 	/**
@@ -128,13 +152,13 @@ class EmployeesController extends Controller
         public function deleteEmail($id, Request $request)
         {
             $email = EmployeeEmail::findOrFail($id);
-            $success = $email->delete();
+            $employee = $this->employeeRepository->findOrFail($email->employee_id);
+            $success = $this->employeeRepository->delEmail($employee, $id);
             
             if ($request->ajax()) {
                 return response()->json(compact('success'));
-            }
+            }            
             
-            $employee = $this->employeeRepository->findOrFail($email->employee_id);
             $customers = Customer::get();
             
             Session::flash('danger', 'Se eliminó correctamente');
@@ -143,15 +167,17 @@ class EmployeesController extends Controller
         
         public function addEmail(Request $request)
         {
-            $employeeEmail = new EmployeeEmail($request->all());
-            
-            $success = $employeeEmail->save();
+            $employee = $this->employeeRepository->findOrFail($request->get('employee_id'));
+            $employeeEmail = $this->employeeRepository->addEmail($employee, $request->get('email'));
+            $success = FALSE;
+            if (count($employeeEmail)) {
+                $success = TRUE;
+            }
             
             if ($request->ajax()) {
                 return response()->json(compact('success', 'employeeEmail'));
             }
             
-            $employee = $this->employeeRepository->findOrFail($employeeEmail->employee_id);
             $customers = Customer::get();
             
             Session::flash('success', 'Se agregó correctamente');
@@ -161,13 +187,13 @@ class EmployeesController extends Controller
         public function deletePhone($id, Request $request)
         {
             $phone = EmployeePhone::findOrFail($id);
-            $success = $phone->delete();
+            $employee = $this->employeeRepository->findOrFail($phone->employee_id);
+            $success = $this->employeeRepository->delPhone($employee, $id);
             
             if ($request->ajax()) {
                 return response()->json(compact('success'));
             }
             
-            $employee = $this->employeeRepository->findOrFail($phone->employee_id);
             $customers = Customer::get();
             
             Session::flash('danger', 'Se eliminó correctamente');
@@ -176,14 +202,17 @@ class EmployeesController extends Controller
         
         public function addPhone(Request $request)
         {
-            $employeePhone = new EmployeePhone($request->all());
-            $success = $employeePhone->save();
+            $employee = $this->employeeRepository->findOrFail($request->get('employee_id'));
+            $employeePhone = $this->employeeRepository->addPhone($employee, $request->get('phone'));
+            $success = FALSE;
+            if (count($employeePhone)) {
+                $success = TRUE;
+            }
             
             if ($request->ajax()) {
                 return response()->json(compact('success', 'employeePhone'));
             }
             
-            $employee = $this->employeeRepository->findOrFail($employeePhone->employee_id);
             $customers = Customer::get();
             
             Session::flash('success', 'Se agregó correctamente');

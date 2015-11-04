@@ -105,6 +105,8 @@ return [
         'role_id'     => 'Perfil',
         'role'        => 'Perfil',
         'job'         => 'Cargo',
-        'customer_id' => 'Cliente'
+        'customer_id' => 'Cliente',
+        'type'        => 'Tipo',
+        'employee_id' => 'Integrante'
     ],
 ];

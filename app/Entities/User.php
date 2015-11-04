@@ -43,4 +43,14 @@ class User extends Entity implements AuthenticatableContract, CanResetPasswordCo
             $this->attributes['password'] = bcrypt($value);
         }
     }
+    
+    public function isAdmin()
+    {
+        return $this->role_id === 1;
+    }
+    
+    public function is($role)
+    {
+        return $this->role_id === $role;
+    }
 }

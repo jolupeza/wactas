@@ -29,5 +29,7 @@ class Kernel extends HttpKernel
         'auth' => 'Wactas\Http\Middleware\Authenticate',
         'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
         'guest' => 'Wactas\Http\Middleware\RedirectIfAuthenticated',
+        'is_admin' => 'Wactas\Http\Middleware\IsAdmin',
+        'select_customer' => 'Wactas\Http\Middleware\SelectCustomer',
     ];
 }

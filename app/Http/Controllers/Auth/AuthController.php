@@ -6,6 +6,7 @@ use Wactas\Http\Controllers\Controller;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -54,5 +55,18 @@ class AuthController extends Controller
     protected function getFailedLoginMessage()
     {
         return trans('auth.failed');
+    }
+    
+    /**
+     * Log the user out of the application.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getLogout()
+    {
+        Session::forget('customer_id');
+        $this->auth->logout();
+
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');
     }
 }

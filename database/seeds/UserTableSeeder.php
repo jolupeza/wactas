@@ -35,7 +35,7 @@ class UserTableSeeder extends BaseSeeder
         $this->create([
             'name' => 'Sudo',
             'email' => 'joseluis@watson.pe',
-            'password' => bcrypt('ABcd1234'),
+            'password' => bcrypt('admin'),
             'avatar' => $faker->imageUrl(64, 64),
             'status' => true,
             'role_id' => 1,

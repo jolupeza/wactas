@@ -19,6 +19,11 @@ class Employee extends Entity
         return $this->hasMany(EmployeePhone::getClass());
     }
     
+    public function projects()
+    {
+        return $this->belongsToMany(Project::getClass(), 'project_employees')->withTimestamps();
+    }
+    
     public function scopeName($query, $name)
     {
         if (trim($name) != "") {
@@ -32,5 +37,9 @@ class Employee extends Entity
             $query->where('customer_id', $customer_id);
         }
     }
-
+    
+    public function inProject(Project $project)
+    {
+        return $this->projects()->where('project_id', $project->id)->count();
+    }
 }

@@ -36,9 +36,14 @@
 	                </button>
 	                <a class="navbar-brand" href="{{ url('admin') }}">Agencia Watson</a>
 	            </div>
+
+				@if (hasCustomer())
+					<h2 class="navbar-text">Cliente: {{ getCustomer()->name }}</h2>
+				@endif
+
 	            <!-- Top Menu Items -->
 	            <ul class="nav navbar-right top-nav">
-	                <li class="dropdown">
+	                {{-- <li class="dropdown">
 	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
 	                    <ul class="dropdown-menu message-dropdown">
 	                        <li class="message-preview">
@@ -117,20 +122,20 @@
 	                            <a href="#">View All</a>
 	                        </li>
 	                    </ul>
-	                </li>
+	                </li> --}}
 	                <li class="dropdown">
-	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+	                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> {{ currentUser()->name }} <b class="caret"></b></a>
 	                    <ul class="dropdown-menu">
 	                        <li>
-	                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+	                            <a href="{{ route('admin.users.edit', currentUser()->id) }}"><i class="fa fa-fw fa-user"></i> Perfil</a>
 	                        </li>
-	                        <li>
+	                        {{-- <li>
 	                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
 	                        </li>
 	                        <li>
 	                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
 	                        </li>
-	                        <li class="divider"></li>
+	                        <li class="divider"></li> --}}
 	                        <li>
 	                            <a href="{{ url('/auth/logout') }}"><i class="fa fa-fw fa-power-off"></i> Cerrar sesión</a>
 	                        </li>
@@ -165,6 +170,12 @@
 			</div>
 	    </div>--}}
 
+	    {{-- Load CKEditor --}}
+	    {!! Html::script('libraries/ckeditor/ckeditor.js') !!}
 	    {!! Html::script('assets/backend/js/main.js') !!}
+
+	    <script type="text/javascript">
+	    	var APP_URL = {!! json_encode(url('/admin')) !!}
+	    </script>
 	</body>
 </html>

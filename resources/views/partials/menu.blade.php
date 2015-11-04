@@ -1,5 +1,9 @@
 <ul class="nav navbar-nav side-nav">
     @foreach ($items as $route => $params)
+        @if ($params['restrict'] && !hasCustomer())
+            <?php continue; ?>
+        @endif
+
         <li role="presentation" {!! Html::classes(['active' => Route::is($route)]) !!}>
             @if (isset($params['submenu']) && count($params['submenu']) > 0)
                 <a href="javascript:;" data-toggle="collapse" data-target="#{{$params['submenu_id']}}"><i class="fa fa-fw {{ $params['icon'] }}"></i> {{ $params['title'] }} <i class="fa fa-fw fa-caret-down"></i></a>

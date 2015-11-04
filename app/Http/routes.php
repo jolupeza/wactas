@@ -33,6 +33,7 @@ Route::group([
     Route::resource('roles', 'RolesController');
     Route::resource('customers', 'CustomersController');
     Route::resource('employees', 'EmployeesController');
+    Route::resource('projects', 'ProjectsController');
     Route::delete('/employees/deleteEmail/{id}', [
         'as'   => 'admin.employee.delete_email',
         'uses' => 'EmployeesController@deleteEmail'
@@ -48,5 +49,13 @@ Route::group([
     Route::post('/employees/addPhone', [
         'as'   => 'admin.employee.add_phone',
         'uses' => 'EmployeesController@addPhone'
+    ]);
+    Route::post('/selectCustomer/{id}', [
+        'as'   => 'admin.dashboard.sel_customer',
+        'uses' => 'DashboardController@selectCustomer'
+    ]);
+    Route::post('/employees/add', [
+        'as'   => 'admin.employee.add',
+        'uses' => 'EmployeesController@add'
     ]);
 });

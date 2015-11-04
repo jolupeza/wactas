@@ -1,4 +1,4 @@
-/*! watson-actas 1.0.0 scripts.js 2015-10-28 10:26:06 AM */
+/*! watson-actas 1.0.0 scripts.js 2015-11-04 9:37:31 AM */
 (function(global, factory) {
     if (typeof module === "object" && typeof module.exports === "object") {
         module.exports = global.document ? factory(global, true) : function(w) {
@@ -13964,7 +13964,7 @@ var j = jQuery.noConflict();
     var msg_success = j("#js-msg-success");
     var msg_danger = j("#js-msg-danger");
     j(document).on("ready", function() {
-        j('[name="status"]').bootstrapSwitch({
+        j('[name="status"], [name="type"]').bootstrapSwitch({
             size: "small",
             onColor: "success",
             radioAllOff: true,
@@ -13999,7 +13999,7 @@ var j = jQuery.noConflict();
             var type = $this.data("type");
             var icon = $this.data("icon");
             var form = j("#js-form-add-" + type);
-            var title = type === "email" ? "Email" : "Teléfono";
+            var title = $this.data("title");
             if ($this.hasClass("active")) {
                 form.fadeOut("slow", function() {
                     $this.html("Agregar " + title + ' <i class="fa ' + icon + '"></i>').removeClass("btn-danger active").addClass("btn-success");
@@ -14076,6 +14076,54 @@ var j = jQuery.noConflict();
                     });
                 }
             });
+        });
+        j(".js-sel-customer").on("click", function(ev) {
+            ev.preventDefault();
+            var $this = j(this);
+            var id = $this.data("id");
+            var form = j("#form-dashboard");
+            var action = form.attr("action").replace(":id", id);
+            j.post(action, form.serialize(), function(response) {
+                if (response.success) {
+                    window.location = APP_URL;
+                }
+            }).fail(function() {
+                alert("No se pudo seleccionar el cliente. Por favor vuelva a intentarlo.");
+            }, "json");
+        });
+        j("#js-form-add-employee").formValidation({
+            locale: "es_ES",
+            framework: "bootstrap",
+            icon: {
+                valid: "glyphicon glyphicon-ok",
+                invalid: "glyphicon glyphicon-remove",
+                validating: "glyphicon glyphicon-refresh"
+            }
+        }).on("err.field.fv", function(e, data) {
+            var field = e.target;
+            j('small.help-block[data-bv-result="INVALID"]').addClass("hide");
+        }).on("success.form.fv", function(e) {
+            e.preventDefault();
+            var form = j(this);
+            var action = form.attr("action");
+            var table = j("#js-table-members");
+            j.post(action, form.serialize(), function(response) {
+                var content = "<tr>" + '<td align="center">' + '<input name="employee_id[]" type="checkbox" value="' + response.employee.id + '" />' + "</td>" + "<td>" + response.employee.name + "</td>" + "</tr>";
+                table.append(content);
+            }).fail(function() {
+                msg_danger.text("No se pudo agregar. Por favor vuelve a intentarlo.");
+                msg_danger.fadeIn("slow");
+                setTimeout(function() {
+                    msg_danger.fadeOut("slow", function() {
+                        j(this).text("");
+                    });
+                }, 3e3);
+            }, "json");
+            form.data("formValidation").resetForm(true);
+            j("#md-addEmployee").modal("hide");
+        });
+        j("#md-addEmployee").on("hide.bs.modal", function(e) {
+            j("#js-form-add-employee").data("formValidation").resetForm(true);
         });
     });
     function DeleteForm(form, button, titles) {

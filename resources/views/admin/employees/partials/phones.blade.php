@@ -45,5 +45,5 @@
 
 	{!! Form::close() !!}
 
-    <p class="text-right"><a href="#" class="btn btn-success js-display-form" id="js-addphone" data-type="phone" data-icon="fa-phone">Agregar Teléfono <i class="fa fa-phone"></i></a></p>
+    <p class="text-right"><a href="#" class="btn btn-success js-display-form" id="js-addphone" data-type="phone" data-icon="fa-phone" data-form="js-form-add-phone" data-title="Teléfono">Agregar Teléfono <i class="fa fa-phone"></i></a></p>
 </div><!-- end panel-body -->

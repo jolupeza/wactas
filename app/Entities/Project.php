@@ -1,9 +1,24 @@
 <?php namespace Wactas\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+class Project extends Entity {
 
-class Project extends Model {
-
-	//
+    protected $fillable = ['name', 'type', 'description', 'objectives', 'status', 'customer_id'];
+    
+    public function customer()
+    {
+        return $this->belongsTo(Customer::getClass());
+    }
+    
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::getClass(), 'project_employees')->withTimestamps();
+    }
+    
+    public function scopeType($query, $type)
+    {
+        if ($type != "") {
+            $query->where('type', $type);
+        }
+    }
 
 }

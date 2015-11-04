@@ -19,7 +19,7 @@ class CustomerTableSeeder extends BaseSeeder
             'name' => $faker->company,
             'code' => $this->characters[rand(0, strlen($this->characters) - 1)] . $this->characters[rand(0, strlen($this->characters) - 1)] . $this->characters[rand(0, strlen($this->characters) - 1)],
             'address' => $faker->address,
-            'logo' => $faker->imageUrl(64, 64),
+            'logo' => $faker->imageUrl(120, 120),
             'status' => $faker->randomElement([false, false, true])
         ];
     }
@@ -27,7 +27,7 @@ class CustomerTableSeeder extends BaseSeeder
     public function run() 
     {
         $this->createMaster();
-        $this->createMultiple(49);
+        $this->createMultiple(5);
     }
 
     private function createMaster() 

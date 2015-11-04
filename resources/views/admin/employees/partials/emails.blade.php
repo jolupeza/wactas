@@ -45,5 +45,5 @@
 
 	{!! Form::close() !!}
 
-    <p class="text-right"><a href="#" class="btn btn-success js-display-form" id="js-addemail" data-type="email" data-icon="fa-envelope-o">Agregar Email <i class="fa fa-envelope-o"></i></a></p>
+    <p class="text-right"><a href="#" class="btn btn-success js-display-form" id="js-addemail" data-type="email" data-icon="fa-envelope-o" data-form="js-form-add-email" data-title="Email">Agregar Email <i class="fa fa-envelope-o"></i></a></p>
 </div><!-- end panel-body -->

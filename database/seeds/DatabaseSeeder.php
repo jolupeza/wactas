@@ -14,21 +14,23 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->truncateTables(array(
-//            'roles',
-//            'users',
-//            'password_resets',
+            //'roles',
+            //'users',
+            //'password_resets',
             'customers',
             'employees',
             'employee_emails',
-            'employee_phones'
+            'employee_phones',
+            'projects',
         ));
 
-//        $this->call('RoleTableSeeder');
-//        $this->call('UserTableSeeder');
+        //$this->call('RoleTableSeeder');
+        //$this->call('UserTableSeeder');
         $this->call('CustomerTableSeeder');
         $this->call('EmployeeTableSeeder');
         $this->call('EmployeeEmailTableSeeder');
         $this->call('EmployeePhoneTableSeeder');
+        $this->call('ProjectTableSeeder');
     }
 
     private function truncateTables(array $tables)

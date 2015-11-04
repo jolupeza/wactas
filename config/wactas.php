@@ -4,11 +4,13 @@
         'menu' => array(
             'admin'       => array(
                 'title' => 'Dashboard',
-                'icon'  => 'fa-dashboard'
+                'icon'  => 'fa-dashboard',
+                'restrict' => FALSE,
             ),
             'admin.customers.index' => array(
                 'title' => 'Gestión de Clientes',
                 'icon'  => 'fa-university',
+                'restrict' => FALSE,
                 'submenu_id' => 'sm-customers',
                 'submenu' => array(
                     array(
@@ -23,9 +25,15 @@
                     )
                 )
             ),
+            'admin.projects.index'       => array(
+                'title' => 'Proyectos',
+                'icon'  => 'fa-suitcase',
+                'restrict' => TRUE,
+            ),
             'admin.users.index' => array(
                 'title' => 'Gestión de Usuarios',
                 'icon'  => 'fa-users',
+                'restrict' => FALSE,
                 'submenu_id' => 'sm-users',
                 'submenu' => array(
                     array(
