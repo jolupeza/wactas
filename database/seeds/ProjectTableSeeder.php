@@ -4,12 +4,12 @@ use Wactas\Entities\Project;
 
 class ProjectTableSeeder extends BaseSeeder
 {
-    public function getModel() 
+    public function getModel()
     {
         return new Project();
     }
-    
-    public function getDummyData(\Faker\Generator $faker, array $customValues = array()) 
+
+    public function getDummyData(\Faker\Generator $faker, array $customValues = array())
     {
         return [
             'name' => $faker->sentence(2),
@@ -17,8 +17,7 @@ class ProjectTableSeeder extends BaseSeeder
             'description' => $faker->paragraph(3),
             'objectives' => $faker->paragraph(6),
             'status' => $faker->randomElement([false, false, true]),
-            'customer_id' => $this->getRandom('Customer')->id
+            'customer_id' => $this->getRandom('Customer')->id,
         ];
     }
 }
-

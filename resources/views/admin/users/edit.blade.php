@@ -31,7 +31,7 @@
 
 	            	@include('partials.flash')
 
-	            	{!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'PUT', 'class' => 'form-horizontal']) !!}
+	            	{!! Form::model($user, ['route' => ['admin.users.update', $user->id], 'method' => 'PUT', 'class' => 'form-horizontal js-frm']) !!}
 
 						@include('admin.users.partials.fields')
 

@@ -6,6 +6,7 @@
     	<span {!! Html::classes(['label', 'label-success' => $user->status, 'label-danger' => !$user->status ]) !!}>{{ trans('users.status.' . $user->status) }}</span>
    	</td>
     <td>{{ $user->role->role }}</td>
+    <td>{{ $user->area->name }}</td>
     <td align="center">
     	<a href="{{ route('admin.users.edit', $user) }}" class="btn btn-success">Editar</a>
         <a href="#" class="btn btn-danger js-delete" data-titles="Usuario',Usuarios" data-total="true">Eliminar</a>

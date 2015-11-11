@@ -1,16 +1,18 @@
-<?php namespace Wactas\Http\Middleware;
+<?php
+
+namespace Wactas\Http\Middleware;
 
 use Closure;
 use Illuminate\Session\Store;
 
-class SelectCustomer {
-
+class SelectCustomer
+{
     /**
      * @var Store
      */
     private $session;
 
-    public function __construct(Store $session) 
+    public function __construct(Store $session)
     {
         $this->session = $session;
     }
@@ -18,8 +20,9 @@ class SelectCustomer {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
@@ -27,7 +30,7 @@ class SelectCustomer {
         if (!$this->session->has('customer_id')) {
             return redirect()->to('admin');
         }
+
         return $next($request);
     }
-
 }

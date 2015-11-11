@@ -9,5 +9,6 @@
     <td align="center">
     	<a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-success">Editar</a>
         <a href="#" class="btn btn-danger js-delete" data-titles="Proyecto,Proyectos" data-total="true">Eliminar</a>
+        <a href="{{ route('admin.minutes.index', $project->id)}}" class="btn btn-info">Actas</a>
     </td>
 </tr>

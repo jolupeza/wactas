@@ -34,10 +34,12 @@ module.exports = function(grunt) {
                     'public/assets/backend/js/main.min.js' : [
                         'public/libraries/jquery/dist/jquery.min.js',
                         'public/libraries/bootstrap/dist/js/bootstrap.min.js',
-                        'public/libraries/formvalidation/dist/js/formValidation.min.js',
-                        'public/libraries/formvalidation/dist/js/framework/bootstrap.min.js',
-                        'public/libraries/formvalidation/dist/js/language/es_ES.js',
-                        'public/libraries/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+                        'public/vendors/formvalidation/dist/js/formValidation.min.js',
+                        'public/vendors/formvalidation/dist/js/framework/bootstrap.min.js',
+                        'public/vendors/formvalidation/dist/js/language/es_ES.js',
+                        'public/vendors/bootstrap-switch/dist/js/bootstrap-switch.min.js',
+                        'public/libraries/moment/min/moment.min.js',
+                        'public/libraries/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js',
                         'resources/assets/backend/js/script.min.js'
                     ]
                 }
@@ -53,10 +55,12 @@ module.exports = function(grunt) {
                     'public/assets/backend/js/main.js' : [
                         'public/libraries/jquery/dist/jquery.js',
                         'public/libraries/bootstrap/dist/js/bootstrap.js',
-                        'public/libraries/formvalidation/dist/js/formValidation.js',
-                        'public/libraries/formvalidation/dist/js/framework/bootstrap.js',
-                        'public/libraries/formvalidation/dist/js/language/es_ES.js',
-                        'public/libraries/bootstrap-switch/dist/js/bootstrap-switch.js',
+                        'public/vendors/formvalidation/dist/js/formValidation.js',
+                        'public/vendors/formvalidation/dist/js/framework/bootstrap.js',
+                        'public/vendors/formvalidation/dist/js/language/es_ES.js',
+                        'public/vendors/bootstrap-switch/dist/js/bootstrap-switch.js',
+                        'public/libraries/moment/min/moment.min.js',
+                        'public/libraries/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js',
                         'resources/assets/backend/js/script.js'
                     ]
                 }

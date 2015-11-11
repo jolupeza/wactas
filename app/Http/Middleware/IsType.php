@@ -1,11 +1,13 @@
-<?php namespace Wactas\Http\Middleware;
+<?php
+
+namespace Wactas\Http\Middleware;
 
 use Closure;
 use Illuminate\Auth\Guard;
 use Illuminate\Session\Store;
 
-abstract class IsType {
-
+abstract class IsType
+{
     /**
      * @var Store
      */
@@ -16,32 +18,32 @@ abstract class IsType {
      */
     private $auth;
 
-    public function __construct(Guard $auth, Store $session) 
+    public function __construct(Guard $auth, Store $session)
     {
         $this->auth = $auth;
         $this->session = $session;
     }
-    
+
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
+     * @param \Illuminate\Http\Request $request
+     * @param \Closure                 $next
+     *
      * @return mixed
      */
     public function handle($request, Closure $next)
     {
-        if (!$this->auth->user()->is($this->getType()))
-        {
+        if (!$this->auth->user()->is($this->getType())) {
             if ($request->ajax()) {
                 return response('Unauthorized.', 401);
             } else {
                 return redirect()->to('auth/login');
             }
         }
+
         return $next($request);
     }
-    
-    abstract public function getType();
 
+    abstract public function getType();
 }

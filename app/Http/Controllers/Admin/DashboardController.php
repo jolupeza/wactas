@@ -9,19 +9,18 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-
     /**
      * @var CustomerRepository
      */
-    private $customerReposiroty;
+    private $customerRepository;
 
     /**
      * Create a new controller instance.
      */
-    public function __construct(CustomerRepository $customerReposiroty)
+    public function __construct(CustomerRepository $customerRepository)
     {
         $this->middleware('auth');
-        $this->customerReposiroty = $customerReposiroty;
+        $this->customerRepository = $customerRepository;
     }
 
     /**
@@ -31,19 +30,21 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $customers = $this->customerReposiroty->newQuery()->where('master', false)->get();
+        $customers = $this->customerRepository->newQuery()->get();
+//        $customers = $this->customerRepository->newQuery()->where('master', false)->get();
         return view('admin.dashboard.index', compact('customers'));
     }
-    
+
     public function selectCustomer($id, Request $request)
     {
-        $customer = $this->customerReposiroty->findOrFail($id);
-        $success = FALSE;
+        $customer = $this->customerRepository->findOrFail($id);
+        $success = false;
         if (count($customer)) {
             Session::put('customer_id', $id);
-            $success = TRUE;
-        }       
-        
+            Session::put('customer_name', $customer->name);
+            $success = true;
+        }
+
         if ($request->ajax()) {
             return response()->json(compact('success'));
         }

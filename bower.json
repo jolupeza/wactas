@@ -19,5 +19,8 @@
   ],
   "devDependencies": {
     "bootstrap": "~3.3.5"
+  },
+  "dependencies": {
+    "eonasdan-bootstrap-datetimepicker": "~4.17.37"
   }
 }

@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
         return trans('auth.failed');
     }
-    
+
     /**
      * Log the user out of the application.
      *
@@ -65,6 +65,7 @@ class AuthController extends Controller
     public function getLogout()
     {
         Session::forget('customer_id');
+        Session::forget('customer_name');
         $this->auth->logout();
 
         return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/');

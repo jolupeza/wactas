@@ -1,6 +1,7 @@
 @import "../../libraries/bootstrap/dist/css/bootstrap.min.css"
-@import "../../libraries/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
-@import "../../libraries/formvalidation/dist/css/formValidation.min.css"
+@import "../../vendors/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css"
+@import "../../vendors/formvalidation/dist/css/formValidation.min.css"
+@import "../../libraries/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css"
 @import "compass/css3"
 
 /* Global Styles */
@@ -161,3 +162,8 @@ ul.alert-dropdown
     display: none
 .Form--filter
     margin-bottom: 20px
+.form-horizontal
+    .has-feedback
+        &.Form-group--date
+            .form-control-feedback
+                right: 55px !important

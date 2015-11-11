@@ -10,21 +10,22 @@ class MemberRepository
     public function add(Employee $employee, Project $project)
     {
         if ($employee->inProject($project)) {
-            return FALSE;
+            return false;
         }
-        
+
         $employee->projects()->attach($project);
-        return TRUE;
+
+        return true;
     }
-    
+
     public function remove(Employee $employee, Project $project)
     {
         if (!$employee->inProject($project)) {
-            return FALSE;
+            return false;
         }
-        
+
         $employee->projects()->detach($project);
-        return TRUE;
+
+        return true;
     }
 }
-

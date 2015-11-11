@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 class ProjectRepository extends BaseRepository
 {
-    public function getModel() 
+    public function getModel()
     {
         return new Project();
     }

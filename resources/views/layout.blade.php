@@ -38,7 +38,7 @@
 	            </div>
 
 				@if (hasCustomer())
-					<h2 class="navbar-text">Cliente: {{ getCustomer()->name }}</h2>
+					<h2 class="navbar-text">Cliente: {{ Session::get('customer_name') }}</h2>
 				@endif
 
 	            <!-- Top Menu Items -->
@@ -171,7 +171,7 @@
 	    </div>--}}
 
 	    {{-- Load CKEditor --}}
-	    {!! Html::script('libraries/ckeditor/ckeditor.js') !!}
+	    {!! Html::script('vendors/ckeditor/ckeditor.js') !!}
 	    {!! Html::script('assets/backend/js/main.js') !!}
 
 	    <script type="text/javascript">

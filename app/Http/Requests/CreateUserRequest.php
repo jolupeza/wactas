@@ -1,33 +1,34 @@
-<?php namespace Wactas\Http\Requests;
+<?php
 
-use Wactas\Http\Requests\Request;
+namespace Wactas\Http\Requests;
 
-class CreateUserRequest extends Request {
+class CreateUserRequest extends Request
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
 
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
-
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-                    'name'        => 'required',
-                    'email'       => 'required|email|unique:users,email',
-                    'password'    => 'required|min:6|same:re-password',
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+                    'name' => 'required',
+                    'email' => 'required|email|unique:users,email',
+                    'job' => 'required',
+                    'password' => 'required|min:6|same:re-password',
                     're-password' => 'required|min:6',
-                    'role_id'     => 'required',
-		];
-	}
-
+                    'role_id' => 'required',
+                    'area_id' => 'required',
+        ];
+    }
 }

@@ -34,8 +34,46 @@
 	    	    <div class="row">
 	    	        <div class="col-xs-12">
 	    	            <div class="table-responsive">
-	    	            	<p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Agregar Usuario</a></p>
-	    	            	<p id="js-total">Hay {{ $users->total() }} usuarios</p>
+	    	            	{{-- <p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Agregar Usuario</a></p>
+	    	            	<p id="js-total">Hay {{ $users->total() }} usuarios</p> --}}
+
+	    	            	<div class="row">
+	    	            		<div class="col-md-4">
+	    	            			<p><a href="{{ route('admin.users.create') }}" class="btn btn-success">Agregar Usuario</a></p>
+	    	            			<p id="js-total">Hay {{ $users->total() }} usuarios</p>
+	    	            		</div>
+	    	            		<div class="col-md-8">
+			            			{!! Form::open(['route' => 'admin.users.index', 'method' => 'GET', 'class' => 'form-inline pull-right']) !!}
+
+		    	            			<div class="form-group">
+											{!! Form::text('name', $name, ['class' => 'form-control', 'placeholder' => 'Nombre' ]) !!}
+										</div>
+
+										<?php $options[''] = 'Filtrar por Perfil'; ?>
+			            				@foreach ($roles as $role)
+			            				    <?php $options[$role->id] = $role->role; ?>
+			            				@endforeach
+
+			            				<div class="form-group">
+			            					{!! Form::select('role_id', $options, $role_id, ['class' => 'form-control']) !!}
+			            				</div>
+
+			            				<?php $options = array(); $options[''] = 'Filtrar por Áreas'; ?>
+			            				@foreach ($areas as $area)
+			            				    <?php $options[$area->id] = $area->name; ?>
+			            				@endforeach
+
+			            				<div class="form-group">
+			            					{!! Form::select('area_id', $options, $area_id, ['class' => 'form-control']) !!}
+			            				</div>
+
+			            				<button class="btn btn-default" type="submit">Filtrar</button>
+
+									{!! Form::close() !!}
+	    	            		</div>
+	    	            	</div>
+
+
 	    	                <table class="table table-bordered table-hover table-striped">
 	    	                    <thead>
 	    	                        <tr>
@@ -44,6 +82,7 @@
 	    	                            <th>Email</th>
 	    	                            <th>Estado</th>
 	    	                            <th>Perfil</th>
+	    	                            <th>Área</th>
 	    	                            <th>Acciones</th>
 	    	                        </tr>
 	    	                    </thead>
@@ -55,7 +94,7 @@
 	    	                </table>
 	    	            </div>
 
-						{!! $users->render() !!}
+						{!! $users->appends(['name' => $name, 'role_id' => $role_id, 'area_id' => $area_id])->render() !!}
 
 	    	        </div>
 	    	    </div><!-- /.row -->

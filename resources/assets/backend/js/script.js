@@ -54,9 +54,6 @@ var j = jQuery.noConflict();
 			var form = j('#js-form-add-' + type);
 			var title = $this.data('title');
 
-			// var form = j($this.data('form'));
-			// var title = (type === 'email') ? 'Email' : 'Teléfono';
-
 			if ($this.hasClass('active')) {
 				form.fadeOut('slow', function() {
 					$this.html('Agregar ' + title + ' <i class="fa ' + icon + '"></i>').removeClass('btn-danger active').addClass('btn-success');
@@ -200,7 +197,6 @@ var j = jQuery.noConflict();
 			var table = j('#js-table-members');
 
 			j.post(action, form.serialize(), function(response) {
-				// success(response);
 				var content = '<tr>'
 	        		    		+'<td align="center">'
 	        		    			+'<input name="employee_id[]" type="checkbox" value="' + response.employee.id + '" />'
@@ -221,40 +217,51 @@ var j = jQuery.noConflict();
 
 			form.data('formValidation').resetForm(true);
 			j('#md-addEmployee').modal('hide');
-
-			/*var addForm = new AddForm(form, j('#js-add-' + type));
-
-			addForm.submit(function(response) {
-				if (response.success) {
-					var table = j('#js-table-' + type);
-					var content = '<tr data-id="' + response.employeeEmail.id + '" class="item">'
-        		    				+ '<td>' + response.employeeEmail.id + '</td>'
-				        		    + '<td>' + response.employeeEmail.email + '</td>'
-				        		    + '<td align="center">'
-				        		        + '<a href="#" class="btn btn-danger js-delete" data-titles="Email,Emails" data-total="false">x</a>'
-				        		    + '</td>'
-				        			+ '</tr>';
-
-				    if (table.find('tr').first().hasClass('js-no-' + type))
-				    {
-				    	table.find('tr').first().remove();
-				    }
-					table.append(content);
-
-					form.data('formValidation').resetForm();
-
-					form.fadeOut('slow', function() {
-						form.find('input[name="' + type + '"]').val('');
-						j('#js-add' + type).html('Agregar Email <i class="fa fa-envelope-o"></i>').removeClass('active btn-danger').addClass('btn-success');
-					});
-				}
-			});*/
 	    });
 
 		// To close modal add employee revalidate form
 		j('#md-addEmployee').on('hide.bs.modal', function(e){
 			j('#js-form-add-employee').data('formValidation').resetForm(true);
 		});
+
+		// Activate datetimepicker
+		j('.dtp-date').datetimepicker({
+			format: 'DD-MM-YYYY HH:mm'
+		});
+
+		// Validate form
+		j('.js-frm').formValidation({
+            locale: 'es_ES',
+			framework: 'bootstrap',
+			icon: {
+				valid: 'glyphicon glyphicon-ok',
+				invalid: 'glyphicon glyphicon-remove',
+				validating: 'glyphicon glyphicon-refresh'
+			},
+			/*fields: {
+				meeting_at: {
+                    validators: {
+                        date: {
+                          format: 'DD-MM-YYYY HH:mm',
+                        }
+                    }
+                },
+			}*/
+		})
+		.on('err.field.fv', function(e, data) {
+			var field = e.target;
+			j('small.help-block[data-bv-result="INVALID"]').addClass('hide');
+	    });
+	    /*.on('success.form.fv', function(e){
+			e.preventDefault();
+
+			alert('bien lo logré');
+	    });*/
+
+	    // To change date revalidate
+        /*j('.dtp-date').on('dp.change dp.show', function(e){
+            j('.js-frm').formValidation('revalidateField', 'meeting_at');
+        });*/
 	});
 
 	function DeleteForm(form, button, titles) {

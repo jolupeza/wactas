@@ -103,10 +103,14 @@ return [
         'password'    => 'Contraseña',
         're-password' => 'Repetir contraseña',
         'role_id'     => 'Perfil',
+        'area_id'     => 'Área',
         'role'        => 'Perfil',
         'job'         => 'Cargo',
         'customer_id' => 'Cliente',
         'type'        => 'Tipo',
-        'employee_id' => 'Integrante'
+        'employee_id' => 'Integrante',
+        'site'        => 'Lugar de reunión',
+        'office'      => 'Oficina',
+        'meeting_at'  => 'Fecha de reunión'
     ],
 ];

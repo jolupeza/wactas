@@ -1,9 +1,10 @@
-<?php namespace Wactas\Http\Middleware;
+<?php
 
+namespace Wactas\Http\Middleware;
 
 class IsAdmin extends IsType
 {
-    public function getType() 
+    public function getType()
     {
         return 1;
     }

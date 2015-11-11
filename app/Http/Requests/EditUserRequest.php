@@ -1,46 +1,46 @@
-<?php namespace Wactas\Http\Requests;
+<?php
 
-use Wactas\Http\Requests\Request;
+namespace Wactas\Http\Requests;
+
 use Illuminate\Routing\Route;
 
-class EditUserRequest extends Request 
+class EditUserRequest extends Request
 {
-
     /**
      * @var Route
      */
     private $route;
 
-    public function __construct(Route $route) 
+    public function __construct(Route $route)
     {
-       
         $this->route = $route;
     }
-    
-	/**
-	 * Determine if the user is authorized to make this request.
-	 *
-	 * @return bool
-	 */
-	public function authorize()
-	{
-		return true;
-	}
 
-	/**
-	 * Get the validation rules that apply to the request.
-	 *
-	 * @return array
-	 */
-	public function rules()
-	{
-		return [
-		    'name'        => 'required',
-                    'email'       => 'required|unique:users,email,' . $this->route->getParameter('users'),
-                    'password'    => 'min:6|same:re-password',
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+                    'email' => 'required|unique:users,email,'.$this->route->getParameter('users'),
+                    'job' => 'required',
+                    'password' => 'min:6|same:re-password',
                     're-password' => 'min:6',
-                    'role_id'     => 'required',
-		];
-	}
-
+                    'role_id' => 'required',
+                    'area_id' => 'required',
+        ];
+    }
 }

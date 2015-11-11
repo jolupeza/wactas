@@ -45,6 +45,11 @@
                         'title' => 'Perfiles',
                         'icon'  => 'fa-users',
                         'url'   => 'admin.roles.index'
+                    ),
+                    array(
+                        'title' => 'Áreas',
+                        'icon'  => 'fa-clone',
+                        'url'   => 'admin.areas.index'
                     )
                 )
             )
