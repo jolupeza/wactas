@@ -3,7 +3,7 @@
 
 	{!! Form::label('name', 'Nombre', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-3">
-		{!! Form::text('name', null, ['class' => 'form-control']) !!}
+		{!! Form::text('name', null, ['class' => 'form-control', 'required']) !!}
     </div><!-- end col-sm-3 -->
 
 </div><!-- end form-group -->

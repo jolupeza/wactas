@@ -29,7 +29,7 @@
 
 	            	@include('partials.messages')
 
-	            	{!! Form::open(['route' => 'admin.customers.store', 'method' => 'POST', 'class' => 'form-horizontal']) !!}
+	            	{!! Form::open(['route' => 'admin.customers.store', 'method' => 'POST', 'class' => 'form-horizontal js-frm']) !!}
 
 						@include('admin.customers.partials.fields')
 

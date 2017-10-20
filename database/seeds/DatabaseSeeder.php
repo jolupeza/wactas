@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'roles',
             'users',
             'password_resets',
-//            'customers',
+            'customers',
 //            'employees',
 //            'employee_emails',
 //            'employee_phones',
@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call('AreaTableSeeder');
         $this->call('RoleTableSeeder');
         $this->call('UserTableSeeder');
-//        $this->call('CustomerTableSeeder');
+        $this->call('CustomerTableSeeder');
 //        $this->call('EmployeeTableSeeder');
 //        $this->call('EmployeeEmailTableSeeder');
 //        $this->call('EmployeePhoneTableSeeder');

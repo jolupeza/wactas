@@ -9,6 +9,6 @@
     <td>{{ $user->area->name }}</td>
     <td align="center">
     	<a href="{{ route('admin.users.edit', $user) }}" class="btn btn-success">Editar</a>
-        <a href="#" class="btn btn-danger js-delete" data-titles="Usuario',Usuarios" data-total="true">Eliminar</a>
+        <a href="#" class="btn btn-danger js-delete" data-titles="Usuario,Usuarios" data-total="true">Eliminar</a>
     </td>
 </tr>

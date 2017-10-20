@@ -22,3 +22,4 @@ function hasCustomer()
 //{
 //    return Customer::findOrFail(session()->get('customer_id'));
 //}
+

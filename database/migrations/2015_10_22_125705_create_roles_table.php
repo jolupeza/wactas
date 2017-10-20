@@ -12,9 +12,9 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
-                        $table->string('role', 20)->unique();
-                        $table->boolean('status')->default(false);
-                        $table->mediumText('description')->nullable();
+            $table->string('role', 20)->unique();
+            $table->boolean('status')->default(false);
+            $table->mediumText('description')->nullable();
             $table->timestamps();
         });
     }

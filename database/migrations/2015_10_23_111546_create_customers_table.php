@@ -12,12 +12,11 @@ class CreateCustomersTable extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('id');
-                        $table->string('name', 100)->unique();
-                        $table->char('code', 3)->unique();
-                        $table->string('address');
-                        $table->string('logo');
-                        $table->boolean('status')->default(false);
-//                        $table->boolean('master')->default(false);
+            $table->string('name', 100)->unique();
+            $table->char('code', 3)->unique();
+            $table->string('address');
+            $table->string('logo');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

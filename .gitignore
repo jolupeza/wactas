@@ -1,6 +1,7 @@
 /vendor
 /node_modules
-/nbproject
+/nbproject/*
 /public/libraries
 /.sass-cache
 .env
+/backups

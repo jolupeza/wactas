@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Wactas\Entities;
 
 class EmployeeEmail extends Entity

@@ -3,6 +3,7 @@
 use Faker\Generator;
 use Faker\Factory as Faker;
 use Wactas\Entities\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends BaseSeeder
 {
@@ -32,11 +33,11 @@ class UserTableSeeder extends BaseSeeder
     public function createAdmin()
     {
         $faker = Faker::create();
-
+        
         $this->create([
             'name' => 'Sudo',
             'email' => 'joseluis@watson.pe',
-            'password' => bcrypt('secret'),
+            'password' => Hash::make('secret'),
             'avatar' => $faker->imageUrl(64, 64),
             'status' => true,
             'role_id' => 1,
